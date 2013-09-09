@@ -43,31 +43,6 @@ import com.google.android.imageloader.ImageLoader.Callback;
  * The MainActivity launcher class.
  * 
  * @author Shrikant Ballal
- * 
- */
-/**
- * @author Abhi
- *
- */
-/**
- * @author Abhi
- *
- */
-/**
- * @author Abhi
- *
- */
-/**
- * @author Abhi
- *
- */
-/**
- * @author Abhi
- *
- */
-/**
- * @author Abhi
- * 
  */
 public class TwitterMainActivity extends Activity {
 
@@ -90,7 +65,7 @@ public class TwitterMainActivity extends Activity {
 	private static RequestToken sRequestToken;
 	private ProgressDialog mProgressDialog;
 	private SharedPreferences mSharedPreferences;
-	private ConnectionDetector mConnectionDetector;
+	private Connection mConnectionDetector;
 	private AlertDialogManager mAlertDialogManager;
 	private EditText mEditText;
 	private ListView mListView;
@@ -107,8 +82,8 @@ public class TwitterMainActivity extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		mAlertDialogManager = new AlertDialogManager();
-		mConnectionDetector = new ConnectionDetector(getApplicationContext());
-		if (!mConnectionDetector.isConnectingToInternet()) {
+		mConnectionDetector = new Connection(getApplicationContext());
+		if (!mConnectionDetector.isConnectedToInternet()) {
 			mAlertDialogManager.showAlertDialog(TwitterMainActivity.this,
 					"Internet Connection Error",
 					"Please connect to working Internet connection");
