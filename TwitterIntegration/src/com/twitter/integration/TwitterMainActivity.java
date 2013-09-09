@@ -234,6 +234,9 @@ public class TwitterMainActivity extends Activity {
 				// Error in updating status
 				Log.d("Twitter Update Error", e.getMessage());
 			}
+			if (tweets == null) {
+				tweets = new ArrayList<twitter4j.Status>();
+			}
 			return tweets;
 		}
 
@@ -250,11 +253,21 @@ public class TwitterMainActivity extends Activity {
 		}
 	}
 
+	/**
+	 * sets the adapter to ListView
+	 * 
+	 * @param tweets
+	 */
 	protected void setListAdapter(ArrayList<twitter4j.Status> tweets) {
-		SearchResultListAdapter adapter = new SearchResultListAdapter(this,
-				tweets);
-		mListView.setVisibility(View.VISIBLE);
-		mListView.setAdapter(adapter);
+		if (tweets.size() == 0) {
+			Toast.makeText(getApplicationContext(), "Search result empty",
+					Toast.LENGTH_SHORT).show();
+		} else {
+			SearchResultListAdapter adapter = new SearchResultListAdapter(this,
+					tweets);
+			mListView.setVisibility(View.VISIBLE);
+			mListView.setAdapter(adapter);
+		}
 	}
 
 	/**
@@ -317,7 +330,7 @@ public class TwitterMainActivity extends Activity {
 			if (loader == null) {
 				loader = new ImageLoader();
 			}
-			loader.bind(holder.imageView, user.getOriginalProfileImageURL(), 
+			loader.bind(holder.imageView, user.getOriginalProfileImageURL(),
 					new Callback() {
 
 						@Override
