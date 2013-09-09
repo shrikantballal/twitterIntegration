@@ -317,7 +317,7 @@ public class TwitterMainActivity extends Activity {
 			if (loader == null) {
 				loader = new ImageLoader();
 			}
-			loader.bind(holder.imageView, user.getMiniProfileImageURL(),
+			loader.bind(holder.imageView, user.getOriginalProfileImageURL(), 
 					new Callback() {
 
 						@Override
@@ -336,8 +336,8 @@ public class TwitterMainActivity extends Activity {
 						}
 					});
 			holder.userName.setText(user.getScreenName());
-			holder.tweet.setText(tweet.getText() + "\non "
-					+ user.getCreatedAt());
+			holder.tweet.setText(tweet.getText().trim() + "\non "
+					+ user.getCreatedAt().toString().trim());
 			return convertView;
 		}
 	}
